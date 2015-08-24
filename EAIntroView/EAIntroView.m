@@ -345,8 +345,12 @@
 
     if(page.customView) {
 
+        if (self.tapToNext) {
+            [pageView addSubview:tapToNextButton];
+            page.customView.userInteractionEnabled = false
+        }
+
         [pageView addSubview:page.customView];
-        [pageView addSubview:tapToNextButton];
 
         [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[customView]-0-|" options:0 metrics:nil views:@{@"customView": page.customView}]];
         [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[customView]-0-|" options:0 metrics:nil views:@{@"customView": page.customView}]];
