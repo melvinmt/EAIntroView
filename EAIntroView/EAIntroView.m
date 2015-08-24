@@ -334,14 +334,14 @@
     
     pageView.accessibilityLabel = [NSString stringWithFormat:@"intro_page_%lu",(unsigned long)[self.pages indexOfObject:page]];
 
-    UIButton *tapToNextButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    tapToNextButton.frame = pageView.bounds;
-    tapToNextButton.translatesAutoresizingMaskIntoConstraints = NO;
-    [tapToNextButton addTarget:self action:@selector(goToNext:) forControlEvents:UIControlEventTouchUpInside];
-    [pageView addSubview:tapToNextButton];
-
     if(page.customView) {
         [pageView addSubview:page.customView];
+        
+    	UIButton *tapToNextButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    	tapToNextButton.frame = pageView.bounds;
+    	tapToNextButton.translatesAutoresizingMaskIntoConstraints = NO;
+    	[tapToNextButton addTarget:self action:@selector(goToNext:) forControlEvents:UIControlEventTouchUpInside];
+    	[pageView addSubview:tapToNextButton];
         
         NSMutableArray *constraints = @[].mutableCopy;
         [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[customView]-0-|" options:0 metrics:nil views:@{@"customView": page.customView}]];
