@@ -333,7 +333,13 @@
     UIView *pageView = [[UIView alloc] initWithFrame:CGRectMake(xIndex, 0, self.scrollView.frame.size.width, self.scrollView.frame.size.height)];
     
     pageView.accessibilityLabel = [NSString stringWithFormat:@"intro_page_%lu",(unsigned long)[self.pages indexOfObject:page]];
-    
+
+    UIButton *tapToNextButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    tapToNextButton.frame = pageView.bounds;
+    tapToNextButton.translatesAutoresizingMaskIntoConstraints = NO;
+    [tapToNextButton addTarget:self action:@selector(goToNext:) forControlEvents:UIControlEventTouchUpInside];
+    [pageView addSubview:tapToNextButton];
+
     if(page.customView) {
         [pageView addSubview:page.customView];
         
@@ -346,11 +352,6 @@
         return pageView;
     }
     
-    UIButton *tapToNextButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    tapToNextButton.frame = pageView.bounds;
-    tapToNextButton.translatesAutoresizingMaskIntoConstraints = NO;
-    [tapToNextButton addTarget:self action:@selector(goToNext:) forControlEvents:UIControlEventTouchUpInside];
-    [pageView addSubview:tapToNextButton];
     
     NSMutableArray *constraints = @[].mutableCopy;
     [constraints addObjectsFromArray:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[tapToNextButton]-0-|" options:0 metrics:nil views:@{@"tapToNextButton": tapToNextButton}]];
