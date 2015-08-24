@@ -347,7 +347,7 @@
 
         if (self.tapToNext) {
             [pageView addSubview:tapToNextButton];
-            page.customView.userInteractionEnabled = false
+            page.customView.userInteractionEnabled = false;
         }
 
         [pageView addSubview:page.customView];
